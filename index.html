@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registro de Abrigos</title>
+  <base href="/">
+  <meta name="application-name" content="Engage to Help" />
+  <meta name="msapplication-TileColor" content="#eeeeee" />
+  <meta name="msapplication-tooltip" content="Engage to Help" />
+  <meta name="msvalidate.01" content="054F7361A5559D276C5748CFB4718FDB" />
+  <meta name="google-site-verification" content="QQRpOmkPML9kN2Lc5jiHOLppqFxCDy9uGAyI77wMNIA" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+  <meta name="application-name" content="Engage to Help Registro de Abrigos" />
+  <meta name="description" content="E se o mundo fosse melhor e mais colorido para as crianças?">
+  <meta property="og:url" content="https://www.engage2.help" />
+  <meta property="og:site_name" content="Engage to Help" />
+  <meta property="og:image" content="https://raw.githubusercontent.com/engage2help/engage2help.github.io/main/assets/icons/logo.png" />
+  <meta property="og:title" content="Engage to Help" />
+  <meta property="og:description" content="E se o mundo fosse melhor e mais colorido para as crianças?" />
+  <meta property="og:locale" content="pt_BR" />
+
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Engage to Help">
+  <link rel="apple-touch-icon" href="https://www.engage2.help/favicon.ico">
+
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="A new Flutter project.">
+
+ 
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="https://www.engage2.help/favicon.ico"/>
+
+ 
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+
+
+  <img class="hand-blue" src="/images/mao_azul.svg" alt="Engage to Help">
+  <img class="hand-pink" src="/images/mao_rosa.svg" alt="">
+
+  <div class="top-appbar"></div>
+  <div class="bottom-appbar"></div>
+  <div class="logo"><img src="/icons/logo.svg" /></div>
+
+  <style>
+    :root {
+      --roxo: #6E5C92;
+      --verde: #15A56A;
+      --azul: #4973A6;
+      --rosa-claro: #F7AA6B;
+      --cinza: #898989;
+    }
+
+    body {
+      background-color: var(--azul);
+    }
+
+    .logo {
+      position: absolute;
+      top: 45%;
+      right: 50%;
+      bottom: 50%;
+      left: 45%;
+      z-index: -1;
+    }
+
+    .top-appbar {
+      height: 56px;
+      background-color: black;
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      opacity: 0.2;
+      z-index: -1;
+    }
+
+    .bottom-appbar {
+      height: 56px;
+      background-color: black;
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: 0.3;
+      z-index: -1;
+    }
+
+    .hand-blue {
+      position: absolute;
+      left: 10%;
+      top: 10%;
+      z-index: -1;
+    }
+
+    .hand-pink {
+      position: absolute;
+      bottom: 7%;
+      right: 7%;
+      z-index: -1;
+    }
+  </style>
+
+
+
+  <!-- This script installs service_worker.js to provide PWA functionality to
+       application. For more information, see:
+       https://developers.google.com/web/fundamentals/primers/service-workers -->
+  <script>
+    var serviceWorkerVersion = '2265710275';
+    var scriptLoaded = false;
+    function loadMainDartJs() {
+      if (scriptLoaded) {
+        return;
+      }
+      scriptLoaded = true;
+      var scriptTag = document.createElement('script');
+      scriptTag.src = 'main.dart.js';
+      scriptTag.type = 'application/javascript';
+      document.body.append(scriptTag);
+    }
+
+    if ('serviceWorker' in navigator) {
+      // Service workers are supported. Use them.
+      window.addEventListener('load', function () {
+        // Wait for registration to finish before dropping the <script> tag.
+        // Otherwise, the browser will load the script multiple times,
+        // potentially different versions.
+        var serviceWorkerUrl = 'flutter_service_worker.js?v=' + serviceWorkerVersion;
+        navigator.serviceWorker.register(serviceWorkerUrl)
+          .then((reg) => {
+            function waitForActivation(serviceWorker) {
+              serviceWorker.addEventListener('statechange', () => {
+                if (serviceWorker.state == 'activated') {
+                  console.log('Installed new service worker.');
+                  loadMainDartJs();
+                }
+              });
+            }
+            if (!reg.active && (reg.installing || reg.waiting)) {
+              // No active web worker and we have installed or are installing
+              // one for the first time. Simply wait for it to activate.
+              waitForActivation(reg.installing || reg.waiting);
+            } else if (!reg.active.scriptURL.endsWith(serviceWorkerVersion)) {
+              // When the app updates the serviceWorkerVersion changes, so we
+              // need to ask the service worker to update.
+              console.log('New service worker available.');
+              reg.update();
+              waitForActivation(reg.installing);
+            } else {
+              // Existing service worker is still good.
+              console.log('Loading app from service worker.');
+              loadMainDartJs();
+            }
+          });
+
+        // If service worker doesn't succeed in a reasonable amount of time,
+        // fallback to plaint <script> tag.
+        setTimeout(() => {
+          if (!scriptLoaded) {
+            console.warn(
+              'Failed to load app from service worker. Falling back to plain <script> tag.',
+            );
+            loadMainDartJs();
+          }
+        }, 4000);
+      });
+    } else {
+      // Service workers not supported. Just drop the <script> tag.
+      loadMainDartJs();
+    }
+  </script>
+</body>
+</html>
